@@ -39,8 +39,23 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+}
 
+Person.prototype.eat = function (someFood){
+  if (this.stomach.length < 10){
+    this.stomach.push(someFood);
+}
+
+Person.prototype.poop = function (){
+  this.stomach = []; 
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
 }
 
 /*
@@ -57,10 +72,26 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon, tank = 0, odometer = 0) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank =tank;
+  this.odometer = odometer;
 }
 
+Car.prototype.fill = function (gallons){
+  this.tank += gallons;
+}
+
+Car.prototype.drive = function (distance){
+  if (distance >= (this.tank*this.milesPerGallon))
+  {
+    let x = (this.tank*this.milesPerGallon);
+    console.log(`I ran out of fuel at ${x} miles!`);
+  }
+  this.odometer += distance;
+  this.tank -= (distance/this.milesPerGallon);
+}
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
