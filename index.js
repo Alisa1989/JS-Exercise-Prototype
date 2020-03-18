@@ -12,9 +12,11 @@ function Airplane(name) {
   this.name = name;
   this.isFlying = false;
 }
+
 Airplane.prototype.takeOff = function () {
   this.isFlying = true;
 };
+
 Airplane.prototype.land = function () {
   this.isFlying = false;
 };
@@ -39,24 +41,28 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person(name, age) {
+function Person(name, age) 
+{
   this.name = name;
   this.age = age;
   this.stomach = [];
 }
 
-Person.prototype.eat = function (someFood){
-  if (this.stomach.length < 10){
+Person.prototype.eat = function (someFood)
+{
+  if (this.stomach.length < 10)
     this.stomach.push(someFood);
-}
+};
 
-Person.prototype.poop = function (){
+Person.prototype.poop = function ()
+{
   this.stomach = []; 
-}
+};
 
-Person.prototype.toString = function(){
+Person.prototype.toString = function()
+{
   return `${this.name}, ${this.age}`;
-}
+};
 
 /*
   TASK 2
@@ -87,10 +93,15 @@ Car.prototype.drive = function (distance){
   if (distance >= (this.tank*this.milesPerGallon))
   {
     let x = (this.tank*this.milesPerGallon);
-    console.log(`I ran out of fuel at ${x} miles!`);
+    this.odometer += x;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles!`;
   }
-  this.odometer += distance;
-  this.tank -= (distance/this.milesPerGallon);
+  else
+  {
+    this.odometer += distance;
+    this.tank -= (distance/this.milesPerGallon);
+  }
 }
 /*
   TASK 3
@@ -99,25 +110,36 @@ Car.prototype.drive = function (distance){
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
 
+
+const Baby = function (name, age, favoriteToy)  // can i not include name and age ?
+{
+  Person.call(this, name, age, favoriteToy);    // can i not include name and age ?
+  this.favoriteToy = favoriteToy;
 }
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () 
+{
+  return `Playing with ${this.favoriteToy}`;
+};
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. global binding - the biggest this
+  2. implicit - before the dot
+  3. new - when using the new keyword
+  4. explicit - when we use call or apply
 */
 
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
+if (typeof exports !== 'undefined') 
+{
   module.exports = module.exports || {}
   if (Airplane) { module.exports.Airplane = Airplane }
   if (Person) { module.exports.Person = Person }
